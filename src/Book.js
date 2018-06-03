@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BookSelect from './BookSelect'
+import BookSelectButton from './BookSelectButton'
 
 class Book extends Component {
 
@@ -14,7 +14,7 @@ class Book extends Component {
                             className="book-cover" 
                             style={{ width: 128, height: 188, backgroundImage: 'url(${bookCoverImg})' }}>
                         </div>
-                        < BookSelect />
+                        < BookSelectButton />
                     </div>
                     <div className="book-title">{bookTitle}</div>
                     <div className="book-authors">{bookAuthor}</div>
