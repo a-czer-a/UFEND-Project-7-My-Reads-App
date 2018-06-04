@@ -2,22 +2,30 @@ import React, { Component } from 'react'
 import BookSelectButton from './BookSelectButton'
 
 class Book extends Component {
-
     render() {
-        const { bookCoverImg, bookTitle, bookAuthor } = this.props
+        const {books, book} = this.props
+        console.log(books)
 
         return (
-            <li>
+                <li>
                 <div className="book">
                     <div className="book-top">
                         <div 
                             className="book-cover" 
-                            style={{ width: 128, height: 188, backgroundImage: 'url(${bookCoverImg})' }}>
+                            style={{backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
                         </div>
                         < BookSelectButton />
                     </div>
-                    <div className="book-title">{bookTitle}</div>
-                    <div className="book-authors">{bookAuthor}</div>
+                    {book.title && book.subtitle ? (
+                        <div className="book-title">{book.title}. {book.subtitle}</div>
+                    ) : (
+                        <div className="book-title">{book.title}</div>
+                    )}
+                    {book.authors.length > 1 ? (
+                        <div className="book-authors">{book.authors.join(', ')}</div>
+                    ) : (
+                        <div className="book-authors">{book.authors}</div>
+                    )}
                 </div>
             </li>
         )

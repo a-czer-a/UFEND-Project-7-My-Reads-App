@@ -12,6 +12,7 @@ class Bookshelf extends Component {
                 books= {books}
                 book= {book}
                 key= {book.id}
+                shelfType= {book.shelf}
                 />
             ))}
             </ol>
