@@ -3,7 +3,7 @@ import BookSelectButton from './BookSelectButton'
 
 class Book extends Component {
     render() {
-        const {books, book} = this.props
+        const { books, book, updateShelf } = this.props
         console.log(books)
 
         return (
@@ -14,7 +14,9 @@ class Book extends Component {
                             className="book-cover" 
                             style={{backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
                         </div>
-                        < BookSelectButton />
+                        < BookSelectButton 
+                            onChange={updateShelf}
+                            />
                     </div>
                     {book.title && book.subtitle ? (
                         <div className="book-title">{book.title}. {book.subtitle}</div>
