@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 class BookSelectButton extends Component {
     render() {
 
-        const { updateShelf } = this.props
-        
+        const { onUpdate, filteredBook } = this.props 
+
         return (
             <div className="book-shelf-changer">
-                <select onChange={updateShelf}>
+                <select onChange={(event) => onUpdate(filteredBook, event)}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
@@ -15,6 +15,7 @@ class BookSelectButton extends Component {
                     <option value="none">None</option>
                     </select>
             </div>
+
         )
     }
 }

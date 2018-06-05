@@ -13,6 +13,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books: [],
+    updatedBooks: [],
     showSearchPage: false
   }
 
@@ -22,15 +23,27 @@ class BooksApp extends React.Component {
     })
 }    
 
-  updateShelf = (updatedBook, updatedShelf) => {
-    BooksAPI.update(updatedBook, updatedShelf).then(() => {
-      updatedBook.shelf = updatedShelf
-      this.setState(state => ({
-        books: state.books
-      }))
-    })
+  // updateShelf = (updatedBook, updatedShelf) => {
+  //   BooksAPI.update(updatedBook, updatedShelf).then(() => {
+  //     updatedBook.shelf = updatedShelf
+  //     this.setState(state => ({
+  //       books: state.books
+  //     }))
+  //   })
 
+  updateShelf = (book, event) => {
+    const updatedShelf = event.target.value
+    book.shelf = updatedShelf
+    this.state.updatedBooks.push(book)
+    console.log(this.state.updatedBooks, updatedShelf)
+      if (book.shelf !== updatedShelf) {
+        this.setState(state => {
+          books: state.books.concat([this.state.updatedBooks])
+      }
+    )
+  }
 }
+
 
   render() {
     return (
@@ -42,13 +55,14 @@ class BooksApp extends React.Component {
 
             < Books 
                 books={this.state.books} 
-                onChange={this.updateShelf}
+                onUpdate={this.updateShelf}
             />
 
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
             </div>
           </div>
+
       </div>
     )
   }

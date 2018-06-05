@@ -3,30 +3,31 @@ import BookSelectButton from './BookSelectButton'
 
 class Book extends Component {
     render() {
-        const { books, book, updateShelf } = this.props
+        const { books, filteredBook, onUpdate } = this.props
         console.log(books)
 
         return (
-                <li>
+                <li key={filteredBook.title}>
                 <div className="book">
                     <div className="book-top">
                         <div 
                             className="book-cover" 
-                            style={{backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
+                            style={{backgroundImage: `url(${filteredBook.imageLinks.thumbnail})` }}>
                         </div>
                         < BookSelectButton 
-                            onChange={updateShelf}
-                            />
+                            onUpdate={ onUpdate }
+                            filteredBook={filteredBook}
+                        />
                     </div>
-                    {book.title && book.subtitle ? (
-                        <div className="book-title">{book.title}. {book.subtitle}</div>
+                    {filteredBook.title && filteredBook.subtitle ? (
+                        <div className="book-title">{filteredBook.title}. {filteredBook.subtitle}</div>
                     ) : (
-                        <div className="book-title">{book.title}</div>
+                        <div className="book-title">{filteredBook.title}</div>
                     )}
-                    {book.authors.length > 1 ? (
-                        <div className="book-authors">{book.authors.join(', ')}</div>
+                    {filteredBook.authors.length > 1 ? (
+                        <div className="book-authors">{filteredBook.authors.join(', ')}</div>
                     ) : (
-                        <div className="book-authors">{book.authors}</div>
+                        <div className="book-authors">{filteredBook.authors}</div>
                     )}
                 </div>
             </li>
