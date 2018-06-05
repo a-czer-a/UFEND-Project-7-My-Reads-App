@@ -22,6 +22,7 @@ class Books extends Component {
                                 <div className="bookshelf-books">
                                     < Bookshelf 
                                         books={ books }
+                                        shelves={shelves}
                                         filteredBooks = { filteredBooks }
                                         onUpdate={ onUpdate }
                                         />

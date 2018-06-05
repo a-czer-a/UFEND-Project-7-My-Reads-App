@@ -2,6 +2,7 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Books from './Books'
+import Search from './Search'
 import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
@@ -14,6 +15,7 @@ class BooksApp extends React.Component {
      */
     books: [],
     updatedBooks: [],
+    allowOnLogging: false,
     showSearchPage: false
   }
 
@@ -23,26 +25,16 @@ class BooksApp extends React.Component {
     })
 }    
 
-  // updateShelf = (updatedBook, updatedShelf) => {
-  //   BooksAPI.update(updatedBook, updatedShelf).then(() => {
-  //     updatedBook.shelf = updatedShelf
-  //     this.setState(state => ({
-  //       books: state.books
-  //     }))
-  //   })
-
   updateShelf = (book, event) => {
     const updatedShelf = event.target.value
     book.shelf = updatedShelf
-    this.state.updatedBooks.push(book)
-    console.log(this.state.updatedBooks, updatedShelf)
-      if (book.shelf !== updatedShelf) {
-        this.setState(state => {
-          books: state.books.concat([this.state.updatedBooks])
-      }
-    )
-  }
-}
+
+    BooksAPI.update(book, updatedShelf).then((res) => {
+      this.state.updatedBooks.push(book)
+      this.setState(state => ({
+        books: state.books.concat([this.state.updatedBooks])
+      }))
+  })}
 
 
   render() {
