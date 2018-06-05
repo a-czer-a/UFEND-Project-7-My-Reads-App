@@ -1,11 +1,30 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Search extends Component {
+
+    state = {
+        query: '',
+        searchResults: []
+    }    
+
+    loadBooks() {
+
+    }
+
+    updateQuery = (query) =>   {
+        this.setState({query: query.trim()})
+    }
+
     render() {
+
+        const { books } = this.props
+        const { query, searchResults } = this.state
+
         return (
                 <div className="search-books">
                   <div className="search-books-bar">
-                    <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+                    < Link className="close-search" to="/">Close</Link >
                     <div className="search-books-input-wrapper">
                       {/*
                         NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -15,7 +34,12 @@ class Search extends Component {
                         However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                         you don't find a specific author or title. Every search is limited by search terms.
                       */}
-                      <input type="text" placeholder="Search by title or author"/>
+                    <input 
+                        type="text" 
+                        placeholder="Search by title or author"
+                        value={query}
+                        onChange={(event) => this.updateQuery(event.target.value)}
+                    />
       
                     </div>
                   </div>

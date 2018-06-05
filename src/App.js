@@ -1,9 +1,15 @@
-import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+// basic
+import React, { Component } from 'react'
+// styling
 import './App.css'
+// components
 import Books from './Books'
 import Search from './Search'
+// API
 import * as BooksAPI from './BooksAPI'
+// React Router
+import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -15,7 +21,7 @@ class BooksApp extends React.Component {
      */
     books: [],
     updatedBooks: [],
-    allowOnLogging: false,
+    // allowOnLogging: false,
     showSearchPage: false
   }
 
@@ -36,10 +42,15 @@ class BooksApp extends React.Component {
       }))
   })}
 
-
   render() {
     return (
-      <div className="app">        
+      <div className="app"> 
+      < Route exact path="/search" render={() => (
+          < Search 
+              books={this.state.books}
+          />     
+      )}/> 
+      < Route exact path="/" render={() => ( 
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -51,10 +62,10 @@ class BooksApp extends React.Component {
             />
 
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              < Link to="/search">Add a book</Link >
             </div>
           </div>
-
+        )}/>
       </div>
     )
   }
