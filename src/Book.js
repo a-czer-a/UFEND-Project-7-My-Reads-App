@@ -7,7 +7,7 @@ class Book extends Component {
         console.log(books)
 
         return (
-                <li key={filteredBook.title}>
+                <li key={filteredBook.id}>
                 <div className="book">
                     <div className="book-top">
                         <div 

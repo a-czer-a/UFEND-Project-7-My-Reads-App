@@ -1,5 +1,5 @@
 // basic
-import React, { Component } from 'react'
+import React from 'react'
 // styling
 import './App.css'
 // components
@@ -45,7 +45,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app"> 
-      < Route exact path="/search" render={() => (
+      < Route exact path="/search" render={(history) => (
           < Search 
               books={this.state.books}
           />     

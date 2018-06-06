@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
+import Book from './Book'
+
 
 class Search extends Component {
 
@@ -7,24 +10,42 @@ class Search extends Component {
         query: '',
         searchResults: []
     }    
-
-    loadBooks() {
-
+    
+    loadSearchResults = (query) => {
+        if (query) {
+            this.setState(
+                { query: query.trim() }
+            )
+            BooksAPI.search(query).then((books) => (
+                    this.setState({ 
+                            searchResults: books,
+                            query: query
+                        })
+            ))
+        } else {
+            this.setState({
+                searchResults: [],
+                query: ''
+            })
+        }
     }
 
-    updateQuery = (query) =>   {
-        this.setState({query: query.trim()})
+    clearQuery = () => {
+        this.setState(
+            { query: ''}
+        )
     }
 
     render() {
 
-        const { books } = this.props
+        const { books, onUpdate } = this.props
         const { query, searchResults } = this.state
 
+        console.log(searchResults)
         return (
                 <div className="search-books">
                   <div className="search-books-bar">
-                    < Link className="close-search" to="/">Close</Link >
+                    < Link onClick={this.clearQuery} className="close-search" to="/">Close</Link >
                     <div className="search-books-input-wrapper">
                       {/*
                         NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -34,17 +55,30 @@ class Search extends Component {
                         However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                         you don't find a specific author or title. Every search is limited by search terms.
                       */}
-                    <input 
-                        type="text" 
-                        placeholder="Search by title or author"
-                        value={query}
-                        onChange={(event) => this.updateQuery(event.target.value)}
-                    />
-      
+                        <input 
+                            type="text" 
+                            placeholder="Search by title or author"
+                            value={query}
+                            onChange={(event) => this.loadSearchResults(event.target.value)}
+                        />
                     </div>
                   </div>
                   <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                  {searchResults && (
+                    <ol className="books-grid">
+                    {searchResults.map((filteredBook) => (
+                        < Book 
+                        filteredBook= {filteredBook}
+                        onUpdate={onUpdate}
+                        key={filteredBook.id}
+                        />
+                    ))}
+                    </ol>
+                  )}
+                  {query && !searchResults && (
+                      <div>No search results.</div>
+                  )}
+                    
                   </div>
                 </div>
         )
