@@ -5,6 +5,7 @@ import './App.css'
 // components
 import Books from './Books'
 import Search from './Search'
+import BookDetails from './BookDetails'
 // API
 import * as BooksAPI from './BooksAPI'
 // React Router
@@ -20,7 +21,6 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books: [],
-    updatedBooks: [],
     // allowOnLogging: false,
     showSearchPage: false
   }
@@ -35,21 +35,22 @@ class BooksApp extends React.Component {
     const updatedShelf = event.target.value
     book.shelf = updatedShelf
 
-    BooksAPI.update(book, updatedShelf).then((res) => {
-      this.state.updatedBooks.push(book)
-      this.setState(state => ({
-        books: state.books.concat([this.state.updatedBooks])
-      }))
+    BooksAPI.update(book, updatedShelf).then(() => {
+      this.setState(this.state)
   })}
 
   render() {
     return (
       <div className="app"> 
+
+
       < Route exact path="/search" render={(history) => (
           < Search 
-              books={this.state.books}
+              books = {this.state.books}
+              onUpdate = {this.updateShelf}
           />     
       )}/> 
+
       < Route exact path="/" render={() => ( 
           <div className="list-books">
             <div className="list-books-title">
@@ -66,6 +67,7 @@ class BooksApp extends React.Component {
             </div>
           </div>
         )}/>
+        
       </div>
     )
   }

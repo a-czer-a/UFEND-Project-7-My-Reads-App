@@ -174,3 +174,32 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+.hidden {
+  visibility: hidden;
+}
+
+/* book details */
+
+.book-details-container {
+  display: block;
+  margin: 20px auto;
+}
+
+.book-details-button {
+  background-color: eee;
+  width: 80px;
+  height: 40px;
+  color: 000;
+}
+
+.close-details {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  font-size: 0;
+}
