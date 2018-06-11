@@ -21,8 +21,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books: [],
-    // allowOnLogging: false,
-    showSearchPage: false
+    bookForDetails: {}
   }
 
   componentDidMount() {
@@ -31,18 +30,30 @@ class BooksApp extends React.Component {
     })
 }    
 
-  updateShelf = (book, event) => {
-    const updatedShelf = event.target.value
-    book.shelf = updatedShelf
+  updateShelf = (updatedBook, updatedShelf) => {
+    // const updatedShelf = event.target.value
+    updatedBook.shelf = updatedShelf
+    BooksAPI.update(updatedBook, updatedShelf).then(() => {
+    // const updatedBooks = this.state.books.filter(book => book.id !== updatedBook.id)
+    // updatedBooks.push(updatedBook)
 
-    BooksAPI.update(book, updatedShelf).then(() => {
-      this.setState(this.state)
-  })}
+      this.setState({
+        books: this.state.books.filter(book => book.id !== updatedBook.id).concat([updatedBook])
+      })
+    })
+  }
+
+  updateBookForDetails = (book) => {
+      BooksAPI.get(book).then((book) => {
+        this.setState({
+          bookForDetails: book
+        })
+      })
+  }
 
   render() {
     return (
       <div className="app"> 
-
 
       < Route exact path="/search" render={(history) => (
           < Search 
@@ -60,13 +71,24 @@ class BooksApp extends React.Component {
             < Books 
                 books={this.state.books} 
                 onUpdate={this.updateShelf}
+                onBookDetailsUpdate={this.updateBookForDetails}
             />
 
             <div className="open-search">
               < Link to="/search">Add a book</Link >
             </div>
           </div>
-        )}/>
+      )}/>
+      
+      < Route exact path="/details/:bookId" render={() => (
+        < BookDetails
+            bookForDetails={this.state.bookForDetails}
+            onUpdate={ this.updateShelf }
+            getBook={this.onBookDetailsUpdate}
+        />
+      )}
+      />
+
         
       </div>
     )

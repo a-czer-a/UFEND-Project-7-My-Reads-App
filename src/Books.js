@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import Bookshelf from './Bookshelf'
 
 class Books extends Component {
+
     render() {
 
-        const { books, onUpdate } = this.props
+        const { books, onUpdate, onBookDetailsUpdate } = this.props
         const shelves = [
-            {type: 'currentlyReading', id: 'Currently Reading'},
-            {type: 'wantToRead', id: 'Want to Read'},
-            {type: 'read', id: 'Read'}
+            {type: 'currentlyReading', title: 'Currently Reading'},
+            {type: 'wantToRead', title: 'Want to Read'},
+            {type: 'read', title: 'Read'}
         ]
     
         return (
@@ -18,13 +19,14 @@ class Books extends Component {
                     return (
                         <div>
                             <div className="bookshelf" key={ shelf.type }>
-                            <h2 className="bookshelf-title">{ shelf.id }</h2>
+                            <h2 className="bookshelf-title">{ shelf.title }</h2>
                                 <div className="bookshelf-books">
                                     < Bookshelf 
                                         books={ books }
-                                        shelves={shelves}
                                         filteredBooks = { filteredBooks }
                                         onUpdate={ onUpdate }
+                                        key={shelf.type}
+                                        onBookDetailsUpdate={onBookDetailsUpdate}
                                         />
                                 </div>
                             </div>

@@ -8,40 +8,50 @@ class Search extends Component {
 
     state = {
         query: '',
-        searchResults: []
+        searchResults: [],
+        error: false
     }    
     
     loadSearchResults = (query) => {
         if (query) {
-            this.setState(
-                { query: query.trim() }
-            )
-            BooksAPI.search(query).then((books) => (
-                    this.setState({ 
-                            searchResults: books,
-                            query: query
-                        })
-            ))
-        } else {
+            BooksAPI.search(query).then((selectedBooks) => {
+                if ('error' in selectedBooks) {
+                    this.setState({
+                        error: true,
+                        searchResults: [],
+                        query: query
+                    })
+                } else {
+                this.setState({ 
+                    query: query,
+                    searchResults: selectedBooks.map((selectedBook) => {
+                    const bookIndex = this.props.books.map((book) => (
+                        book.id)).indexOf(selectedBook.id)
+                        return bookIndex >= 0 ? this.props.books[bookIndex] : selectedBook
+                    })
+                })
+            }}
+        )} else {
             this.setState({
                 searchResults: [],
-                query: ''
+                query: '',
+                error: false
             })
         }
     }
 
     clearQuery = () => {
-        this.setState(
-            { query: ''}
-        )
+        this.setState({
+            query: '',
+            error: false
+        })
     }
-
+    
+    
     render() {
-
         const { books, onUpdate } = this.props
         const { query, searchResults } = this.state
-
-        console.log(searchResults)
+        
         return (
                 <div className="search-books">
                   <div className="search-books-bar">
@@ -59,14 +69,15 @@ class Search extends Component {
                             type="text" 
                             placeholder="Search by title or author"
                             value={query}
-                            onChange={(event) => this.loadSearchResults(event.target.value)}
+                            onChange={(event) => this.loadSearchResults(event.target.value.trim())}
                         />
                     </div>
                   </div>
                   <div className="search-books-results">
-                  {searchResults && (
+                  {!this.state.error && searchResults && (
                     <ol className="books-grid">
                     {searchResults.map((filteredBook) => (
+                        
                         < Book 
                         filteredBook= {filteredBook}
                         onUpdate={onUpdate}
@@ -75,9 +86,16 @@ class Search extends Component {
                     ))}
                     </ol>
                   )}
-                  {query && !searchResults && (
+                  {this.state.error && (
                       <div>No search results.</div>
                   )}
+                  {!this.state.query && (
+                      <div className="book-details">
+                            <p>The search from BooksAPI is limited to a particular set of search terms. You can find those search terms here:</p>
+                            <p className="html-address">https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md</p>
+                      </div>
+                  )}
+
                     
                   </div>
                 </div>
