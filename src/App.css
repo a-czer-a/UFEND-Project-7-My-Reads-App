@@ -179,8 +179,15 @@ body, .app {
   font-size: 0.8em;
 }
 /* book details */
-.loading-icon {
-  background-image: url('./icons/loading-icon.gif');
+.loading-icon-container {
+  display: block;
+}
+
+.loading-icon-container img {
+  /* margin: 100px auto; */
+  position: absolute;
+  left: 50%;
+  top: 35%;
 }
 
 .book-details-container {
@@ -190,11 +197,11 @@ body, .app {
 .book-details {
   margin: 20px 60px;
   display: grid;
-  grid-template-columns: 320px auto;
+  grid-template-columns: 230px auto;
   grid-template-rows: 220px auto 20px;
 }
 .book-info {
-  max-width: 300px;
+  margin-right: 20px;
   grid-column: 1;
 }
 
