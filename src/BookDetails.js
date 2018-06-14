@@ -23,7 +23,7 @@ class BookDetails extends Component {
     }
 
     render() {
-        const { onUpdate } = this.props
+        const onUpdate = this.props.match.params.onUpdate
         const bookDetails = this.state.bookDetails
         const isLoaded = this.state.isLoaded
         const id = bookDetails.id
@@ -54,13 +54,19 @@ class BookDetails extends Component {
                                 className="book-cover" 
                                 style={{backgroundImage: `url(${cover})` }}>
                             </div>
+                            < BookSelectButton 
+                                onUpdate={ onUpdate }
+                                filteredBook={ bookDetails }
+                                shelf={shelf}
+                                key={id}
+                            />
                         </div>
                     </div>
                     <div className="book-info">
                         {title && subtitle ? (
-                            <div className="book-title">{title}. {subtitle}</div>
+                            <div className="book-title-details">{title}. {subtitle}</div>
                         ) : (
-                            <div className="book-title">{title}</div>
+                            <div className="book-title-details">{title}</div>
                         )}
                         {author.length > 1 ? (
                             <div className="book-authors">{author.join(', ')}</div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
+import sortBy from 'sort-by'
 
 
 class Bookshelf extends Component {
@@ -12,6 +13,8 @@ class Bookshelf extends Component {
 
     render() {
         const { onUpdate, filteredBooks, onBookDetailsUpdate } = this.props
+        filteredBooks.sort(sortBy('title'))
+
         return (
             <ol className="books-grid">
             {filteredBooks.map((filteredBook) => (

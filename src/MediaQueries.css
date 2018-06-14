@@ -1,0 +1,44 @@
+@media screen and (max-width: 800px) {
+    .book-details {
+        margin: 20px 40px;
+        grid-template-columns: 350px auto;
+        grid-template-rows: 270px auto 20px;
+      }
+
+    .book {
+        justify-self: center;
+    }
+    .book-info {
+        grid-column: 1/2;
+        grid-row: 1;
+    }
+            
+    .description-container {
+        grid-column: 1/3;
+        grid-row: 2;
+        margin-right: 30px;
+    }
+
+    .book-cover {
+        width: 128px;
+        height: 188px;
+    }
+
+    .book-title-details,
+    .book-authors {
+        font-size: 1.2em;
+    }      
+}
+
+@media screen and (max-width: 500px) {
+    .book-details {
+        grid-template-columns: 230px auto;
+      }
+}
+
+@media (min-width: 600px) {
+    .bookshelf {
+      padding: 0 20px 40px;
+    }
+  }
+  

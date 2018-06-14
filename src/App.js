@@ -2,6 +2,7 @@
 import React from 'react'
 // styling
 import './App.css'
+import './MediaQueries.css'
 // components
 import Books from './Books'
 import Search from './Search'
@@ -56,7 +57,7 @@ class BooksApp extends React.Component {
           />     
       )}/> 
 
-      < Route exact path="/" render={() => ( 
+      < Route exact path="/" render={(history) => ( 
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -73,7 +74,7 @@ class BooksApp extends React.Component {
           </div>
       )}/>
       
-      < Route path="/details/:bookId" component={BookDetails}/>
+      < Route path="/details/:bookId" component={BookDetails} onUpdate={this.updateShelf}/>
         
       </div>
     )

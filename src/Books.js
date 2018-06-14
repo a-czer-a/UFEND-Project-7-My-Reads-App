@@ -23,10 +23,11 @@ class Books extends Component {
             <div className="list-books-content">
             {shelves.map((shelf) => {
                 const filteredBooks = books.filter(book => book.shelf === shelf.type)
+                const booksOnShelf = filteredBooks.length
                     return (
                         <div>
                             <div className="bookshelf" key={ shelf.type }>
-                            <h2 className="bookshelf-title">{ shelf.title }</h2>
+                            <h2 className="bookshelf-title">{ shelf.title } <span className="number">({booksOnShelf})</span></h2>
                                 <div className="bookshelf-books">
                                     < Bookshelf 
                                         filteredBooks = { filteredBooks }
