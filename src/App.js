@@ -12,7 +12,6 @@ import * as BooksAPI from './BooksAPI'
 // React Router
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import Book from './Book';
 
 class BooksApp extends React.Component {
   state = {
