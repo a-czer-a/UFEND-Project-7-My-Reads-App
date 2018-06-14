@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 
 class Search extends Component {
+    static propTypes = {
+        onUpdate: PropTypes.func.isRequired,
+    }
 
     state = {
         query: '',
@@ -14,7 +18,7 @@ class Search extends Component {
     
     loadSearchResults = (query) => {
         if (query) {
-            BooksAPI.search(query).then((selectedBooks) => {
+            BooksAPI.search(query.trim()).then((selectedBooks) => {
                 if ('error' in selectedBooks) {
                     this.setState({
                         error: true,
@@ -49,8 +53,8 @@ class Search extends Component {
     
     
     render() {
-        const { books, onUpdate } = this.props
-        const { query, searchResults } = this.state
+        const { onUpdate } = this.props
+        const { query, searchResults, error } = this.state
         
         return (
                 <div className="search-books">
@@ -69,15 +73,14 @@ class Search extends Component {
                             type="text" 
                             placeholder="Search by title or author"
                             value={query}
-                            onChange={(event) => this.loadSearchResults(event.target.value.trim())}
+                            onChange={(event) => this.loadSearchResults(event.target.value)}
                         />
                     </div>
                   </div>
                   <div className="search-books-results">
-                  {!this.state.error && searchResults && (
+                  {!error && searchResults && (
                     <ol className="books-grid">
                     {searchResults.map((filteredBook) => (
-                        
                         < Book 
                         filteredBook= {filteredBook}
                         onUpdate={onUpdate}
@@ -86,11 +89,11 @@ class Search extends Component {
                     ))}
                     </ol>
                   )}
-                  {this.state.error && (
+                  {error && (
                       <div>No search results.</div>
                   )}
-                  {!this.state.query && (
-                      <div className="book-details">
+                  {!query && (
+                      <div className="search-info">
                             <p>The search from BooksAPI is limited to a particular set of search terms. You can find those search terms here:</p>
                             <p className="html-address">https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md</p>
                       </div>

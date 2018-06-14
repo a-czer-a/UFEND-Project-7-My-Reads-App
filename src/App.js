@@ -11,6 +11,7 @@ import * as BooksAPI from './BooksAPI'
 // React Router
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import Book from './Book';
 
 class BooksApp extends React.Component {
   state = {
@@ -43,16 +44,9 @@ class BooksApp extends React.Component {
     })
   }
 
-  updateBookForDetails = (book) => {
-      BooksAPI.get(book).then((book) => {
-        this.setState({
-          bookForDetails: book
-        })
-      })
-  }
-
   render() {
     return (
+
       <div className="app"> 
 
       < Route exact path="/search" render={(history) => (
@@ -71,7 +65,6 @@ class BooksApp extends React.Component {
             < Books 
                 books={this.state.books} 
                 onUpdate={this.updateShelf}
-                onBookDetailsUpdate={this.updateBookForDetails}
             />
 
             <div className="open-search">
@@ -80,15 +73,7 @@ class BooksApp extends React.Component {
           </div>
       )}/>
       
-      < Route exact path="/details/:bookId" render={() => (
-        < BookDetails
-            bookForDetails={this.state.bookForDetails}
-            onUpdate={ this.updateShelf }
-            getBook={this.onBookDetailsUpdate}
-        />
-      )}
-      />
-
+      < Route path="/details/:bookId" component={BookDetails}/>
         
       </div>
     )

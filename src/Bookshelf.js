@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
 import Book from './Book'
+import PropTypes from 'prop-types'
+
 
 class Bookshelf extends Component {
-    render() {
-        const { books, onUpdate, filteredBooks, onBookDetailsUpdate, key } = this.props
+    static propTypes = {
+        filteredBooks: PropTypes.array.isRequired,
+        onUpdate: PropTypes.func.isRequired,
+        onBookDetailsUpdate: PropTypes.func.isRequired
+    }
 
+    render() {
+        const { onUpdate, filteredBooks, onBookDetailsUpdate } = this.props
         return (
-            <ol className="books-grid" key={key}>
+            <ol className="books-grid">
             {filteredBooks.map((filteredBook) => (
                 < Book 
-                filteredBook= {filteredBook}
+                filteredBook={filteredBook}
+                key={filteredBook.id}
                 onUpdate={onUpdate}
                 onBookDetailsUpdate={onBookDetailsUpdate}
                 />
@@ -18,9 +26,6 @@ class Bookshelf extends Component {
 
         )
     }
-
-
 }
-
 
 export default Bookshelf

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 
 class BookSelectButton extends Component {
+    static propTypes = {
+        filteredBook: PropTypes.object.isRequired,
+        onUpdate: PropTypes.func.isRequired,
+        shelf: PropTypes.string,
+    }
 
     render() {
 

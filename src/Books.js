@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import Bookshelf from './Bookshelf'
+import PropTypes from 'prop-types'
+
 
 class Books extends Component {
-
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        onUpdate: PropTypes.func.isRequired,
+        onBookDetailsUpdate: PropTypes.func.isRequired
+    }
+    
     render() {
 
         const { books, onUpdate, onBookDetailsUpdate } = this.props
@@ -22,10 +29,8 @@ class Books extends Component {
                             <h2 className="bookshelf-title">{ shelf.title }</h2>
                                 <div className="bookshelf-books">
                                     < Bookshelf 
-                                        books={ books }
                                         filteredBooks = { filteredBooks }
                                         onUpdate={ onUpdate }
-                                        key={shelf.type}
                                         onBookDetailsUpdate={onBookDetailsUpdate}
                                         />
                                 </div>

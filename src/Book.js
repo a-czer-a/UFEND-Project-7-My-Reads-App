@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
 import BookSelectButton from './BookSelectButton'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 
 class Book extends Component {
-    
+
+    static propTypes = {
+        filteredBook: PropTypes.object.isRequired,
+        onUpdate: PropTypes.func.isRequired,
+        onBookDetailsUpdate: PropTypes.func.isRequired
+    }
+
     render() {
-        const {filteredBook, onUpdate, onBookDetailsUpdate, updatedBookShelf } = this.props
+        const {filteredBook, onUpdate, onBookDetailsUpdate } = this.props
         const author = filteredBook.authors ? filteredBook.authors : []
         const cover = filteredBook.imageLinks ? filteredBook.imageLinks.thumbnail || filteredBook.imageLinks.smallThumbnail : null
         const subtitle = filteredBook.subtitle ? filteredBook.subtitle : null
         const { title, id, shelf } = filteredBook
-        
+
         return (
                 <li key={id}>
                 <div className="book">
@@ -20,7 +28,6 @@ class Book extends Component {
                             style={{backgroundImage: `url(${cover})` }}>
                         </div>
                         < BookSelectButton 
-                            // onBookDetailsUpdate={onBookDetailsUpdate}
                             onUpdate={ onUpdate }
                             filteredBook={ filteredBook }
                             shelf={shelf}
@@ -37,7 +44,9 @@ class Book extends Component {
                     ) : (
                         <div className="book-authors">{author}</div>
                     )}
-                    <Link to="/details/${filteredBook.id}">Details</Link>
+                    <Link to={`/details/${id}`}>
+                        <button className="book-details-button">Details</button>
+                    </Link>
                 </div>
             </li>
         )
