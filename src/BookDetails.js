@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import BookSelectButton from './BookSelectButton'
 import * as BooksAPI from './BooksAPI'
 import LoadingIcon from './icons/loading-icon.gif'
 
 
 class BookDetails extends Component {
-
     state = {
         bookDetails: {},
         isLoaded: false
     }
 
     componentDidMount() {
-            const id = this.props.match.params.bookId
+            const id = this.props.id
             BooksAPI.get(id).then((bookDetails) => {
                 this.setState({
                 bookDetails: bookDetails,
@@ -23,7 +22,8 @@ class BookDetails extends Component {
     }
 
     render() {
-        const onUpdate = this.props.match.params.onUpdate
+
+        const {onUpdate} = this.props
         const bookDetails = this.state.bookDetails
         const isLoaded = this.state.isLoaded
         const id = bookDetails.id
@@ -43,7 +43,7 @@ class BookDetails extends Component {
         return (
             <div>
             {!isLoaded ? (
-                <div className="loading-icon-container"><img src={LoadingIcon}></img></div>
+                <div className="loading-icon-container"><img src={LoadingIcon} alt="Loading icon"></img></div>
             ) : (
                 <div className="book-details-container">
                 <Link className="close-details" to="/">Close</Link>
@@ -55,8 +55,8 @@ class BookDetails extends Component {
                                 style={{backgroundImage: `url(${cover})` }}>
                             </div>
                             < BookSelectButton 
-                                onUpdate={ onUpdate }
-                                filteredBook={ bookDetails }
+                                onUpdate={onUpdate}
+                                filteredBook={bookDetails}
                                 shelf={shelf}
                                 key={id}
                             />

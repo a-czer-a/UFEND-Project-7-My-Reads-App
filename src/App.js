@@ -10,17 +10,11 @@ import BookDetails from './BookDetails'
 // API
 import * as BooksAPI from './BooksAPI'
 // React Router
-import { Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import {Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: [],
     bookForDetails: {}
   }
@@ -32,12 +26,8 @@ class BooksApp extends React.Component {
 }    
 
   updateShelf = (updatedBook, updatedShelf) => {
-    // const updatedShelf = event.target.value
     updatedBook.shelf = updatedShelf
     BooksAPI.update(updatedBook, updatedShelf).then(() => {
-    // const updatedBooks = this.state.books.filter(book => book.id !== updatedBook.id)
-    // updatedBooks.push(updatedBook)
-
       this.setState({
         books: this.state.books.filter(book => book.id !== updatedBook.id).concat([updatedBook])
       })
@@ -46,35 +36,33 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-
       <div className="app"> 
-
       < Route exact path="/search" render={(history) => (
           < Search 
               books = {this.state.books}
               onUpdate = {this.updateShelf}
           />     
       )}/> 
-
       < Route exact path="/" render={(history) => ( 
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-
             < Books 
                 books={this.state.books} 
                 onUpdate={this.updateShelf}
             />
-
             <div className="open-search">
               < Link to="/search">Add a book</Link >
             </div>
           </div>
       )}/>
-      
-      < Route path="/details/:bookId" component={BookDetails} onUpdate={this.updateShelf}/>
-        
+      < Route path="/details/:bookId" render={(props) => (
+            < BookDetails
+                id={props.match.params.bookId}
+                onUpdate={this.updateShelf}
+            />
+        )}/>
       </div>
     )
   }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
@@ -26,15 +26,16 @@ class Search extends Component {
                         query: query
                     })
                 } else {
-                this.setState({ 
-                    query: query,
-                    searchResults: selectedBooks.map((selectedBook) => {
-                    const bookIndex = this.props.books.map((book) => (
-                        book.id)).indexOf(selectedBook.id)
-                        return bookIndex >= 0 ? this.props.books[bookIndex] : selectedBook
+                    this.setState({ 
+                        query: query,
+                        searchResults: selectedBooks.map((selectedBook) => {
+                        const bookIndex = this.props.books.map((book) => (
+                            book.id)).indexOf(selectedBook.id)
+                            return bookIndex >= 0 ? this.props.books[bookIndex] : selectedBook
+                        })
                     })
-                })
-            }}
+                }
+            }
         )} else {
             this.setState({
                 searchResults: [],
@@ -53,8 +54,8 @@ class Search extends Component {
     
     
     render() {
-        const { onUpdate } = this.props
-        const { query, searchResults, error } = this.state
+        const {onUpdate} = this.props
+        const {query, searchResults, error} = this.state
         
         return (
                 <div className="search-books">
@@ -73,7 +74,10 @@ class Search extends Component {
                             type="text" 
                             placeholder="Search by title or author"
                             value={query}
-                            onChange={(event) => this.loadSearchResults(event.target.value)}
+                            onChange={(event) => {
+                                console.log('Query: ' + event.target.value)
+                                this.loadSearchResults(event.target.value)
+                            }}
                         />
                     </div>
                   </div>
@@ -82,7 +86,7 @@ class Search extends Component {
                     <ol className="books-grid">
                     {searchResults.map((filteredBook) => (
                         < Book 
-                        filteredBook= {filteredBook}
+                        filteredBook={filteredBook}
                         onUpdate={onUpdate}
                         key={filteredBook.id}
                         />

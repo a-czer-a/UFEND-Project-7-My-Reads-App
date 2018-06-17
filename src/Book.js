@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import BookSelectButton from './BookSelectButton'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 
@@ -9,15 +9,14 @@ class Book extends Component {
     static propTypes = {
         filteredBook: PropTypes.object.isRequired,
         onUpdate: PropTypes.func.isRequired,
-        onBookDetailsUpdate: PropTypes.func.isRequired
     }
 
     render() {
-        const {filteredBook, onUpdate, onBookDetailsUpdate } = this.props
+        const {filteredBook, onUpdate} = this.props
         const author = filteredBook.authors ? filteredBook.authors : []
         const cover = filteredBook.imageLinks ? filteredBook.imageLinks.thumbnail || filteredBook.imageLinks.smallThumbnail : null
         const subtitle = filteredBook.subtitle ? filteredBook.subtitle : null
-        const { title, id, shelf } = filteredBook
+        const {title, id, shelf} = filteredBook
 
         return (
                 <li key={id}>
@@ -28,8 +27,8 @@ class Book extends Component {
                             style={{backgroundImage: `url(${cover})` }}>
                         </div>
                         < BookSelectButton 
-                            onUpdate={ onUpdate }
-                            filteredBook={ filteredBook }
+                            onUpdate={onUpdate}
+                            filteredBook={filteredBook}
                             shelf={shelf}
                             key={id}
                         />

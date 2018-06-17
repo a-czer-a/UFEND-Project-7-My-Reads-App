@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 class BookSelectButton extends Component {
@@ -10,7 +10,7 @@ class BookSelectButton extends Component {
 
     render() {
 
-        const { onUpdate, filteredBook, shelf } = this.props
+        const {onUpdate, filteredBook, shelf} = this.props
         const value = shelf ? shelf : 'none'
 
         return (

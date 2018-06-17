@@ -12,7 +12,6 @@ body, .app {
 
 .list-books-title {
   padding: 10px 0;
-  /* background: #2e7c31; */
   background: rgb(148, 56, 88);
   text-align: center;
 }
@@ -181,7 +180,6 @@ body, .app {
 }
 
 .loading-icon-container img {
-  /* margin: 100px auto; */
   position: absolute;
   left: 50%;
   top: 35%;
