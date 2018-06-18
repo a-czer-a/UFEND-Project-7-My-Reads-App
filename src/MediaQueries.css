@@ -23,11 +23,6 @@
         width: 128px;
         height: 188px;
     }
-
-    .book-title-details,
-    .book-authors {
-        font-size: 1.2em;
-    }      
 }
 
 @media screen and (max-width: 500px) {

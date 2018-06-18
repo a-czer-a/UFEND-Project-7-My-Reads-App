@@ -37,7 +37,7 @@ body, .app {
   text-align: center;
 }
 .number {
-  color: #bbb;
+  color: rgb(148, 56, 88);
   font-weight: 300;
 }
 .open-search {
