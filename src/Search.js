@@ -18,7 +18,8 @@ class Search extends Component {
     
     componentDidMount() {
         this.setState({
-            searchResults: []
+            searchResults: [], 
+            query: ''
         })
     }
 
@@ -74,7 +75,7 @@ class Search extends Component {
                                 onChange={(event) => {
                                     // console.log('Query: ' + event.target.value.trim())
                                     this.loadSearchResults(event.target.value)
-                                    console.log(searchResults.length)
+                                    // console.log(searchResults.length)
                                 }}
                             />
                         </div>
