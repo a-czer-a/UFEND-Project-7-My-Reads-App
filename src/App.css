@@ -270,7 +270,8 @@ grid-row: 1/3;
 
 .html-address {
   cursor: pointer;
-  font-style: italic;
+  font-size: 1em;
+  color: #777;
 }
 
 .html-address:hover,
