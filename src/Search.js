@@ -73,7 +73,6 @@ class Search extends Component {
                         <input 
                             type="text" 
                             placeholder="Search by title or author"
-                            value={query}
                             onChange={(event) => {
                                 console.log('Query: ' + event.target.value)
                                 this.loadSearchResults(event.target.value)
@@ -82,7 +81,7 @@ class Search extends Component {
                     </div>
                   </div>
                   <div className="search-books-results">
-                  {!error && searchResults && (
+                  {!error && (
                     <ol className="books-grid">
                     {searchResults.map((filteredBook) => (
                         < Book 

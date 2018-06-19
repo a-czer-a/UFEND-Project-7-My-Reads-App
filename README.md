@@ -2,19 +2,20 @@
 
 This is the 7th project for Udacity Front-End Nanodegree build on top of the starter template containing a static example of what should be made interactive with React. The template was provided by Udacity.
 
-The applications allows the user to search for books, select them and add to one of three categorized bookshelfs: currently reading, want to read and read.
+The application allows the user to search for books, select them and add to one of three categorized bookshelfs: currently reading, want to read and read.
+
 The user can check the basic information (like publisher, language, rating or description - if they are available) on each book using "details" button.
 
 ## Installation
 
-To get started:
+To get started you need to have Node.js and npm installed on your computer. Then:
 
 * clone this git repository 
 `$ git clone git@github.com:a-czer-a/UFEND-Project-7-My-Reads-App.git`
-or download the files
+or download a zipped file
 * go to the directory with downloaded or cloned project files 
-* install all needed dependencies with `npm install` or `yarn install`
-* use command line `npm start` or `yarn start` to run the application in a new browser tab/window. By default server runs on port 3000.
+* install dependencies with `npm install` or `yarn install`
+* use command line `npm start` or `yarn start` to run the application in a new browser tab/window (this will start the development server). By default server runs on port 3000.
 
 ## Note about API
 
