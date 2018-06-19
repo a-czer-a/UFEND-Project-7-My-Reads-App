@@ -35,6 +35,7 @@ class Search extends Component {
                 } else {
                     this.setState({ 
                         query: query,
+                        error: false,
                         searchResults: selectedBooks.map((selectedBook) => {
                         const bookIndex = this.props.books.map((book) => (
                             book.id)).indexOf(selectedBook.id)
@@ -73,21 +74,21 @@ class Search extends Component {
                                 type="text" 
                                 placeholder="Search by title or author"
                                 onChange={(event) => {
-                                    // console.log('Query: ' + event.target.value.trim())
+                                    console.log('Query: ' + event.target.value.trim())
                                     this.loadSearchResults(event.target.value)
-                                    // console.log(searchResults.length)
+                                    console.log(searchResults.length)
                                 }}
                             />
                         </div>
                     </div>
                     <div className="search-books-results">
-                        {!query && (
+                        {query.length < 2 && (
                             <div className="search-info">
                                 <p>The search from BooksAPI is limited to a particular set of search terms. You can find them here:</p>
                                 <p className="html-address">https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md</p>
                             </div>
                         )}
-                        {query && searchResults && (
+                        {query.length > 1 && searchResults && (
                             <ol className="books-grid">
                                 {searchResults.map((filteredBook) => (
                                     <Book 
