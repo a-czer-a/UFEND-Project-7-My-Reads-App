@@ -15,8 +15,8 @@ class BookDetails extends Component {
             const id = this.props.id
             BooksAPI.get(id).then((bookDetails) => {
                 this.setState({
-                bookDetails: bookDetails,
-                isLoaded: true
+                    bookDetails: bookDetails,
+                    isLoaded: true
                 })
             })
     }
@@ -47,45 +47,45 @@ class BookDetails extends Component {
             ) : (
                 <div className="book-details-container">
                     <Link className="close-details" to="/">Close</Link>
-                        <div className="book-details">
-                            <div className="book">
-                                <div className="book-top">
-                                    <div 
-                                        className="book-cover" 
-                                        style={{backgroundImage: `url(${cover})` }}>
-                                    </div>
-                                    < BookSelectButton 
-                                        onUpdate={onUpdate}
-                                        filteredBook={bookDetails}
-                                        shelf={shelf}
-                                        key={id}
-                                    />
+                    <div className="book-details">
+                        <div className="book">
+                            <div className="book-top">
+                                <div 
+                                    className="book-cover" 
+                                    style={{backgroundImage: `url(${cover})` }}>
                                 </div>
+                                <BookSelectButton 
+                                    onUpdate={onUpdate}
+                                    filteredBook={bookDetails}
+                                    shelf={shelf}
+                                    key={id}
+                                />
                             </div>
-                            <div className="book-info">
-                                {title && subtitle ? (
-                                    <div className="book-title-details">{title}. {subtitle}</div>
-                                ) : (
-                                    <div className="book-title-details">{title}</div>
-                                )}
-                                {author.length > 1 ? (
-                                    <div className="book-authors">{author.join(', ')}</div>
-                                ) : (
-                                    <div className="book-authors">{author}</div>
-                                )}
-                                <div className="book-publisher"><span className="rubric">Publisher:</span> {publisher}</div>
-                                <div className="book-detail"><span className="rubric">Publish date:</span> {publishedDate}</div>
-                                <div className="book-detail"><span className="rubric">Language:</span> {language}</div>
-                                <div className="book-detail"><span className="rubric">Pages:</span> {pageCount}</div>
-                                <div className="book-detail"><span className="rubric">Category:</span> {categories}</div>
-                                <div className="book-detail"><span className="rubric">Average rating:</span> {averageRating}</div>
-                            </div>
-                    <div className="description-container">
-                        <h3 className="details-header">Description</h3>
-                        <div className="book-description">{description}</div>
+                        </div>
+                        <div className="book-info">
+                            {title && subtitle ? (
+                                <div className="book-title-details">{title}. {subtitle}</div>
+                            ) : (
+                                <div className="book-title-details">{title}</div>
+                            )}
+                            {author.length > 1 ? (
+                                <div className="book-authors">{author.join(', ')}</div>
+                            ) : (
+                                <div className="book-authors">{author}</div>
+                            )}
+                            <div className="book-publisher"><span className="rubric">Publisher:</span> {publisher}</div>
+                            <div className="book-detail"><span className="rubric">Publish date:</span> {publishedDate}</div>
+                            <div className="book-detail"><span className="rubric">Language:</span> {language}</div>
+                            <div className="book-detail"><span className="rubric">Pages:</span> {pageCount}</div>
+                            <div className="book-detail"><span className="rubric">Category:</span> {categories}</div>
+                            <div className="book-detail"><span className="rubric">Average rating:</span> {averageRating}</div>
+                        </div>
+                        <div className="description-container">
+                            <h3 className="details-header">Description</h3>
+                            <div className="book-description">{description}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
             )}
             </div>
         )

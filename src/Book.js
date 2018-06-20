@@ -8,7 +8,7 @@ class Book extends Component {
 
     static propTypes = {
         filteredBook: PropTypes.object.isRequired,
-        onUpdate: PropTypes.func.isRequired,
+        onUpdate: PropTypes.func.isRequired
     }
 
     render() {

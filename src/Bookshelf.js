@@ -7,7 +7,7 @@ import sortBy from 'sort-by'
 class Bookshelf extends Component {
     static propTypes = {
         filteredBooks: PropTypes.array.isRequired,
-        onUpdate: PropTypes.func.isRequired,
+        onUpdate: PropTypes.func.isRequired
     }
 
     render() {

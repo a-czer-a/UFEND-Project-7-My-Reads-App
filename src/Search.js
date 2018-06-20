@@ -7,24 +7,25 @@ import Book from './Book'
 
 class Search extends Component {
     static propTypes = {
-        onUpdate: PropTypes.func.isRequired,
+        onUpdate: PropTypes.func.isRequired
     }
 
     state = {
         searchResults: [],
-        query: "",
+        query: '',
         error: false
     }    
     
     componentDidMount() {
         this.setState({
             searchResults: [], 
-            query: ''
+            query: '',
+            error: false
         })
     }
 
     loadSearchResults = (query) => {
-        if (query) {
+        if (query.length > 1) {
             BooksAPI.search(query).then((selectedBooks) => {
                 if ('error' in selectedBooks) {
                     this.setState({
@@ -37,27 +38,22 @@ class Search extends Component {
                         query: query,
                         error: false,
                         searchResults: selectedBooks.map((selectedBook) => {
-                        const bookIndex = this.props.books.map((book) => (
-                            book.id)).indexOf(selectedBook.id)
-                            return bookIndex >= 0 ? this.props.books[bookIndex] : selectedBook
+                            const bookIndex = this.props.books.map((book) => (
+                                book.id)).indexOf(selectedBook.id)
+                                return bookIndex >= 0 ? this.props.books[bookIndex] : selectedBook
                         })
                     })
                 }
             }
         )} else {
-            this.clearQuery()
+            this.setState({
+                query: '',
+                error: false,
+                searchResults: []
+            })
         }
     }
 
-    clearQuery = () => {
-        this.setState({
-            query: "",
-            error: false,
-            searchResults: []
-        })
-    }
-    
-    
     render() {
         const {onUpdate} = this.props
         const {query, searchResults, error} = this.state
@@ -65,7 +61,7 @@ class Search extends Component {
         return (
                 <div className="search-books">
                     <div className="search-books-bar">
-                        < Link onClick={this.clearQuery} className="close-search" to="/">Close</Link >
+                        <Link className="close-search" to="/">Close</Link>
                         <div className="search-books-input-wrapper">
                             <input 
                                 type="text" 

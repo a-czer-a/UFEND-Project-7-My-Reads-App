@@ -5,7 +5,7 @@ class BookSelectButton extends Component {
     static propTypes = {
         filteredBook: PropTypes.object.isRequired,
         onUpdate: PropTypes.func.isRequired,
-        shelf: PropTypes.string,
+        shelf: PropTypes.string
     }
 
     render() {

@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
             </div>
           </div>
       )}/>
-      < Route path="/details/:bookId" render={(props, history) => (
+      < Route path="/details/:bookId" render={(props) => (
             < BookDetails
                 id={props.match.params.bookId}
                 onUpdate={this.updateShelf}

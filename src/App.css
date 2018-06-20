@@ -218,16 +218,16 @@ grid-row: 1/3;
   color: #333;
 }
 
-.book-publisher {
-  margin-top:18px;
+.book-publisher,
+.book-detail {
   font-size: 0.8em;
   color: #999;
 }
-
+.book-publisher {
+  margin-top: 18px;
+}
 .book-detail {
   margin-top: 5px;
-  font-size: 0.8em;
-  color: #999;
 }
 
 .book-title,
