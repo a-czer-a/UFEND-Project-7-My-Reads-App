@@ -24,7 +24,7 @@ class Search extends Component {
     }
 
     loadSearchResults = (query) => {
-        if (query.length > 1) {
+        if (query) {
             BooksAPI.search(query).then((selectedBooks) => {
                 if ('error' in selectedBooks) {
                     this.setState({
@@ -45,11 +45,7 @@ class Search extends Component {
                 }
             }
         )} else {
-            this.setState({
-                searchResults: [],
-                query: "",
-                error: false
-            })
+            this.clearQuery()
         }
     }
 
@@ -57,6 +53,7 @@ class Search extends Component {
         this.setState({
             query: "",
             error: false,
+            searchResults: []
         })
     }
     
@@ -74,21 +71,21 @@ class Search extends Component {
                                 type="text" 
                                 placeholder="Search by title or author"
                                 onChange={(event) => {
-                                    console.log('Query: ' + event.target.value.trim())
-                                    this.loadSearchResults(event.target.value)
+                                    console.log('Query: ' + event.target.value)
+                                    this.loadSearchResults(event.target.value.replace(/^\s+/g, ''))
                                     console.log(searchResults.length)
                                 }}
                             />
                         </div>
                     </div>
                     <div className="search-books-results">
-                        {query.length < 2 && (
+                        {!query && !error && (
                             <div className="search-info">
                                 <p>The search from BooksAPI is limited to a particular set of search terms. You can find them here:</p>
                                 <p className="html-address">https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md</p>
                             </div>
                         )}
-                        {query.length > 1 && searchResults && (
+                        {query && searchResults && (
                             <ol className="books-grid">
                                 {searchResults.map((filteredBook) => (
                                     <Book 
