@@ -36,34 +36,34 @@ class BooksApp extends React.Component {
   render() {
       return (
           <div className="app"> 
-          <Switch>
-              <Route exact path="/search" render={(history) => (
-                  <Search 
-                      books = {this.state.books}
-                      onUpdate = {this.updateShelf}
-                  />     
-              )}/> 
-              <Route exact path="/" render={(history) => ( 
-                  <div className="list-books">
-                    <div className="list-books-title">
-                      <h1>MyReads</h1>
-                    </div>
-                    <Books 
-                        books={this.state.books} 
-                        onUpdate={this.updateShelf}
-                    />
-                    <div className="open-search">
-                      <Link to="/search">Add a book</Link >
-                    </div>
-                  </div>
-              )}/>
-              <Route path="/details/:bookId" render={(props) => (
-                    <BookDetails
-                        id={props.match.params.bookId}
-                        onUpdate={this.updateShelf}
-                    />
-                )}/>
-          </Switch>
+              <Switch>
+                  <Route exact path="/search" render={(history) => (
+                      <Search 
+                          books = {this.state.books}
+                          onUpdate = {this.updateShelf}
+                      />     
+                  )}/> 
+                  <Route exact path="/" render={(history) => ( 
+                      <div className="list-books">
+                        <div className="list-books-title">
+                          <h1>MyReads</h1>
+                        </div>
+                        <Books 
+                            books={this.state.books} 
+                            onUpdate={this.updateShelf}
+                        />
+                        <div className="open-search">
+                          <Link to="/search">Add a book</Link >
+                        </div>
+                      </div>
+                  )}/>
+                  <Route path="/details/:bookId" render={(props) => (
+                        <BookDetails
+                            id={props.match.params.bookId}
+                            onUpdate={this.updateShelf}
+                        />
+                    )}/>
+              </Switch>
           </div>
         )
   }
