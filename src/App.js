@@ -1,17 +1,17 @@
 // basic
 import React from 'react'
-// styling
-import './App.css'
-import './MediaQueries.css'
-// components
-import Books from './Books'
-import Search from './Search'
-import BookDetails from './BookDetails'
 // API
 import * as BooksAPI from './BooksAPI'
 // React Router
 import {Route} from 'react-router-dom'
 import {Link} from 'react-router-dom'
+// Components
+import Books from './Books'
+import Search from './Search'
+import BookDetails from './BookDetails'
+// Styling
+import './App.css'
+import './MediaQueries.css'
 
 class BooksApp extends React.Component {
   state = {

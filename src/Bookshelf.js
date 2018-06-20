@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import Book from './Book'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
+import Book from './Book'
 
 
 class Bookshelf extends Component {

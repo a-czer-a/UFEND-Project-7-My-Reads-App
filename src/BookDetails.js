@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import BookSelectButton from './BookSelectButton'
 import * as BooksAPI from './BooksAPI'
+import BookSelectButton from './BookSelectButton'
 import LoadingIcon from './icons/loading-icon.gif'
 
 
@@ -22,7 +22,6 @@ class BookDetails extends Component {
     }
 
     render() {
-
         const {onUpdate} = this.props
         const bookDetails = this.state.bookDetails
         const isLoaded = this.state.isLoaded

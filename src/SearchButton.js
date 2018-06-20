@@ -1,15 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-class SearchButton extends Component {
-render() {
-
+const SearchButton = () => {
     return (
         <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
         </div>
     )   
-    }
 }
 
 export default SearchButton

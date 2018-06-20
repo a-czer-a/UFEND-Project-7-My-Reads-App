@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import BookSelectButton from './BookSelectButton'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-
+import BookSelectButton from './BookSelectButton'
 
 class Book extends Component {
     static propTypes = {
