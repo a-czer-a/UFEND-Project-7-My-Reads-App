@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 
 
 class Book extends Component {
-
     static propTypes = {
         filteredBook: PropTypes.object.isRequired,
         onUpdate: PropTypes.func.isRequired
@@ -26,7 +25,7 @@ class Book extends Component {
                             className="book-cover" 
                             style={{backgroundImage: `url(${cover})` }}>
                         </div>
-                        < BookSelectButton 
+                        <BookSelectButton 
                             onUpdate={onUpdate}
                             filteredBook={filteredBook}
                             shelf={shelf}

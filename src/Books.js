@@ -10,7 +10,6 @@ class Books extends Component {
     }
     
     render() {
-        
         const {books, onUpdate} = this.props
         const shelves = [
             {type: 'currentlyReading', title: 'Currently Reading'},
@@ -28,7 +27,7 @@ class Books extends Component {
                             <div className="bookshelf">
                             <h2 className="bookshelf-title">{shelf.title} <span className="number">({booksOnShelf})</span></h2>
                                 <div className="bookshelf-books">
-                                    < Bookshelf 
+                                    <Bookshelf 
                                         filteredBooks={filteredBooks}
                                         onUpdate={onUpdate}
                                     />

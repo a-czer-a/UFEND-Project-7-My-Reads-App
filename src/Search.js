@@ -15,27 +15,31 @@ class Search extends Component {
         query: '',
         error: false
     }    
-    
+
     componentDidMount() {
         this.setState({
-            searchResults: [], 
-            query: '',
+            searchResults: [],
             error: false
         })
     }
 
-    loadSearchResults = (query) => {
-        if (query.length > 1) {
+    updateQuery = (query) => {
+        this.setState({
+            query: query
+        })
+        this.runSearch(query)
+    }
+
+    runSearch = (query) => {
+        if (query) {
             BooksAPI.search(query).then((selectedBooks) => {
                 if ('error' in selectedBooks) {
                     this.setState({
-                        query: query,
                         searchResults: [],
                         error: true
                     })
                 } else {
                     this.setState({ 
-                        query: query,
                         error: false,
                         searchResults: selectedBooks.map((selectedBook) => {
                             const bookIndex = this.props.books.map((book) => (
@@ -47,9 +51,9 @@ class Search extends Component {
             }
         )} else {
             this.setState({
+                searchResults: [],
                 query: '',
-                error: false,
-                searchResults: []
+                error: false
             })
         }
     }
@@ -67,10 +71,9 @@ class Search extends Component {
                                 type="text" 
                                 placeholder="Search by title or author"
                                 onChange={(event) => {
-                                    console.log('Query: ' + event.target.value)
-                                    this.loadSearchResults(event.target.value.replace(/^\s+/g, ''))
-                                    console.log(searchResults.length)
-                                }}
+                                    console.log('Query: ' + event.target.value, searchResults.length, error)
+                                    this.updateQuery(event.target.value.replace(/^\s+/g, ''))}
+                                }
                             />
                         </div>
                     </div>
