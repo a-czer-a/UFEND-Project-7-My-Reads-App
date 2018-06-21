@@ -1,32 +1,31 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import Book from './Book'
 
 
-class Bookshelf extends Component {
-    static propTypes = {
-        filteredBooks: PropTypes.array.isRequired,
-        onUpdate: PropTypes.func.isRequired
-    }
+const Bookshelf = (props) => {
 
-    render() {
-        const {onUpdate, filteredBooks} = this.props
-        filteredBooks.sort(sortBy('title'))
+    const {onUpdate, filteredBooks} = props
+    filteredBooks.sort(sortBy('title'))
 
-        return (
-            <ol className="books-grid">
-            {filteredBooks.map((filteredBook) => (
-                <Book 
+    return (
+        <ol className="books-grid">
+        {filteredBooks.map((filteredBook) => (
+            <Book 
                 filteredBook={filteredBook}
                 key={filteredBook.id}
                 onUpdate={onUpdate}
-                />
-            ))}
-            </ol>
-
-        )
-    }
+            />
+        ))}
+        </ol>
+    )
 }
+
+Bookshelf.propTypes = {
+    filteredBooks: PropTypes.array.isRequired,
+    onUpdate: PropTypes.func.isRequired
+}
+
 
 export default Bookshelf

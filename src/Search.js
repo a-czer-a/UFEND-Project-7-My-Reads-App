@@ -16,13 +16,6 @@ class Search extends Component {
         error: false
     }    
 
-    componentDidMount() {
-        this.setState({
-            searchResults: [],
-            error: false
-        })
-    }
-
     updateQuery = (query) => {
         this.setState({
             query: query
@@ -71,7 +64,6 @@ class Search extends Component {
                                 type="text" 
                                 placeholder="Search by title or author"
                                 onChange={(event) => {
-                                    console.log('Query: ' + event.target.value, searchResults.length, error)
                                     this.updateQuery(event.target.value.replace(/^\s+/g, ''))}
                                 }
                             />
